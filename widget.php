@@ -66,7 +66,7 @@ class Simple_News_Widget extends WP_Widget {
       $url = filter_var($item['url'], FILTER_SANITIZE_URL);
       $url = self::replace_url_by_var($url);
 
-      if (empty($text) || empty($url)) {
+      if (empty($text)) {
         unset($new_instance['items'][$i]);
       } else {
         $new_instance['items'][$i] = array(

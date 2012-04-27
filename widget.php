@@ -6,6 +6,7 @@ class Simple_News_Widget extends WP_Widget {
     'show_title' => true,
     'items'      => array(),
     'max_items'  => 5,
+    'icl_language' => 'multilingual',
   );
   private static $valid_id = '/^[a-z0-9\-_]+$/i';
 
@@ -22,6 +23,8 @@ class Simple_News_Widget extends WP_Widget {
 
   public function widget($args, $instance) {
     if (empty($instance['items'])) return;
+
+    if (!in_array($instance['icl_language'], array('multilingual', ICL_LANGUAGE_CODE))) return;
 
     extract($args);
 
@@ -153,6 +156,9 @@ HTML;
     </p>
     <hr>
 HTML;
+
     }
+
+    icl_widget_text_language_selectbox($instance['icl_language'], $this->get_field_name('icl_language'));
   }
 }

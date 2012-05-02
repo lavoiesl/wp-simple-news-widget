@@ -2,10 +2,10 @@
 
 class Simple_News_Widget extends WP_Widget {
   private static $default_options = array(
-    'title'      => false,
-    'show_title' => true,
-    'items'      => array(),
-    'max_items'  => 5,
+    'title'        => false,
+    'show_title'   => true,
+    'items'        => array(),
+    'max_items'    => 5,
     'icl_language' => 'multilingual',
   );
   private static $valid_id = '/^[a-z0-9\-_]+$/i';
@@ -24,7 +24,11 @@ class Simple_News_Widget extends WP_Widget {
   public function widget($args, $instance) {
     if (empty($instance['items'])) return;
 
-    if (!in_array($instance['icl_language'], array('multilingual', ICL_LANGUAGE_CODE))) return;
+    /* Multilingual feature */
+    if (defined(ICL_LANGUAGE_CODE)) {
+      if (!in_array($instance['icl_language'], array('multilingual', ICL_LANGUAGE_CODE)))
+        return;
+    }
 
     extract($args);
 
@@ -159,6 +163,9 @@ HTML;
 
     }
 
-    icl_widget_text_language_selectbox($instance['icl_language'], $this->get_field_name('icl_language'));
+    /* Multilingual feature */
+    if (function_exists('icl_widget_text_language_selectbox')) {
+      icl_widget_text_language_selectbox($instance['icl_language'], $this->get_field_name('icl_language'));
+    }
   }
 }

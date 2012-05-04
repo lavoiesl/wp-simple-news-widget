@@ -25,7 +25,7 @@ class Simple_News_Widget extends WP_Widget {
     if (empty($instance['items'])) return;
 
     /* Multilingual feature */
-    if (defined(ICL_LANGUAGE_CODE)) {
+    if (defined("ICL_LANGUAGE_CODE")) {
       if (!in_array($instance['icl_language'], array('multilingual', ICL_LANGUAGE_CODE)))
         return;
     }
